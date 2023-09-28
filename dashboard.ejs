@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&family=Poppins:wght@600&family=Raleway:wght@400;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-image: url("../img/bg-book2.jpg");
+            background-color: #017199;
+            background-color: #ffffff;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            /*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=dceae3&c2=ffffff&gt=l&gd=dtl
+*/
+            background: #DCEAE3;
+            background: linear-gradient(135deg, #DCEAE3, #FFFFFF);
+
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            color: red;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            width: 300px;
+            margin-right: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: background-color 0.3s;
+            font-family: 'Poppins', sans-serif;
+
+
+        }
+
+        input[type="text"]:focus {
+            background-color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #searchResults {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .book {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            max-width: 300px;
+            text-align: left;
+            background-color: #fff;
+            color: #333;
+            transition: transform 0.3s;
+        }
+
+        .book:hover {
+            transform: scale(1.05);
+        }
+
+        .book img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .book h2 {
+            font-size: 1.2em;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .book p {
+            font-size: 0.9em;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .readMoreLink {
+            color: #3498db;
+            text-decoration: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .readMoreLink:hover {
+            text-decoration: underline;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            width: 300px;
+            margin-right: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: background-color 0.3s;
+            animation: slideIn 0.5s forwards;
+            font-family: 'Poppins', sans-serif;
+            /* Add animation property */
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInButton {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        input[type="text"] {
+            /* Existing styles... */
+            animation: slideIn 0.5s forwards;
+            /* Add animation property */
+        }
+
+        button {
+            /* Existing styles... */
+            animation: slideInButton 0.5s forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Search For Your Favourite Book !</h1>
+    <div>
+        <input type="text" id="searchInput" placeholder="Enter book name">
+        <button id="searchButton">Search</button>
+    </div>
+    <div id="searchResults">
+        <!-- Results will be displayed here -->
+    </div>
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const searchResults = document.getElementById('searchResults');
+
+        searchButton.addEventListener('click', () => {
+            const searchTerm = searchInput.value;
+            fetchBooks(searchTerm);
+        });
+
+        function fetchBooks(searchTerm) {
+            const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    renderResults(data.items);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+        function renderResults(books) {
+            searchResults.innerHTML = '';
+
+            books.forEach(book => {
+                const title = book.volumeInfo.title;
+                const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author';
+                const description = book.volumeInfo.description || 'No description available';
+                const hasLongDescription = description.length > 150;
+                const truncatedDescription = hasLongDescription ? description.slice(0, 150) + '...' : description;
+                const thumbnail = book.volumeInfo.imageLinks?.thumbnail || 'https://via.placeholder.com/150';
+
+                const bookElement = document.createElement('div');
+                bookElement.classList.add('book');
+
+                bookElement.innerHTML = `
+                    <img src="${thumbnail}" alt="${title}">
+                    <h2>${title}</h2>
+                    <p>Author(s): ${authors}</p>
+                    <p class="description">${truncatedDescription}</p>
+                    ${hasLongDescription ? `<a class="readMoreLink" data-description="${description}">Read More</a>` : ''}
+                `;
+
+                searchResults.appendChild(bookElement);
+            });
+
+            const readMoreLinks = document.querySelectorAll('.readMoreLink');
+            readMoreLinks.forEach(link => {
+                link.addEventListener('click', showFullDescription);
+            });
+        }
+
+        function showFullDescription() {
+            const description = this.dataset.description;
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`<h2>Full Description</h2><p>${description}</p>`);
+        }
+    </script>
+</body>
+
+</html>

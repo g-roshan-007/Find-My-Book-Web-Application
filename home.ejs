@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&family=Poppins:wght@600&family=Raleway:wght@400;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #eaf9ff;
+            font-family: Arial, sans-serif;
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
+            color: #000;
+        }
+
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ff0000d8;
+            padding: 10px 20px;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Poppins';
+            font-weight: 400;
+        }
+
+        .navbar-brand img {
+            height: 60px;
+            margin-right: 10px;
+            scale: 300%;
+            margin-top: 10px;
+        }
+
+
+        .navbar-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .navbar-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #fff;
+            color: #ff0000;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+            text-transform: uppercase;
+            font-family: 'poppins';
+        }
+
+        .navbar-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: row;
+            height: 85vh;
+        }
+
+        .left-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            text-align: left;
+        }
+
+        #fmb {
+            font-size: 80px;
+            text-align: left;
+            color: red;
+
+        }
+
+        .right-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-container img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+
+        }
+
+        .welcome-message {
+            margin-top: 80px;
+            margin-bottom: 2px;
+            text-align: left;
+            margin-left: 20px;
+            font-size: 20px;
+            color: red !important;
+        }
+
+        .welcome-message h1 {
+            color: red;
+        }
+
+
+        .information {
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .signup-button,
+        .login-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff0000d8;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+            font-family: 'poppins';
+        }
+
+        .signup-button:hover,
+        .login-button:hover {
+            background-color: #cf0000;
+        }
+
+        .gradient-text {
+            background: -webkit-linear-gradient(left, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .left-container,
+            .right-container {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="#" class="navbar-brand">
+
+            Find My Book
+        </a>
+        <div class="navbar-buttons">
+            <button class="navbar-button" id="signupButton">Sign Up</button>
+            <button class="navbar-button" id="loginButton">Log In</button>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="left-container">
+            <div class="welcome-message">
+                <h1 class="gradient-text"> Welcome to <br> <span id="fmb">Find My Book</span> </h1>
+            </div>
+
+            <div class="information">
+                <p>"Find My Book is a streamlined platform for discovering a diverse range of titles, powered by the
+                    Google Books API. Seamlessly search, preview, and access detailed book information. Your go-to
+                    destination for exploring the world of literature with ease. Simplify your book search and discovery
+                    process with Find My Book. Start exploring today!"</p>
+            </div>
+            <div class="button-container">
+                <button class="signup-button" id="signupButton"> Sign Up </button>
+                <button class="login-button" id="loginButton">Log In</button>
+            </div>
+        </div>
+        <div class="right-container">
+            <img src='/6920933.jpg' alt="Dashboard Image">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // This event listener ensures that the JavaScript code 
+            // inside it will run after the HTML document has been completely loaded.
+
+            const signupButton = document.getElementById('signupButton');
+            const loginButton = document.getElementById('loginButton');
+
+            // Getting references to the "Sign Up" and "Log In" buttons using their IDs.
+
+            signupButton.addEventListener('click', () => {
+                // Adding an event listener to the "Sign Up" button. 
+                // This function will be executed when the button is clicked.
+
+                window.location.href = '/signup_page';
+                // When the "Sign Up" button is clicked, this line of code changes the
+                // location of the browser to the '/signup_page' URL. 
+                // This effectively redirects the user to the sign-up page.
+            });
+
+            loginButton.addEventListener('click', () => {
+                // Adding an event listener to the "Log In" button.
+                // This function will be executed when the button is clicked.
+
+                window.location.href = '/login_page';
+                // When the "Log In" button is clicked, this line of code changes the
+                // location of the browser to the '/login_page' URL. 
+                // This effectively redirects the user to the login page.
+            });
+        });
+
+    </script>
+</body>
+
+</html>

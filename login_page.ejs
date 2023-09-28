@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            background: #FFEFBA;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #d0edfa, #ffffff);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #d0edfa, #ffffff);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            font-family: poppins;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 25px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin: 80px auto;
+            max-width: 350px;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 15%;
+            background: #FF512F;
+            background: -webkit-linear-gradient(to right, #F09819, #FF512F);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #F09819, #FF512F);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: whitesmoke;
+            padding: 8px;
+            border-radius: 30px;
+            margin-top: -5%;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+            display: block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 95%;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        @media screen and (max-width: 500px) {
+            .container {
+                margin: 20px auto;
+                max-width: 90%;
+            }
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            animation: shake 0.5s;
+        }
+
+        .popup.show {
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-10px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Login Here!</h1>
+        <form id="login-form" method="post" action="/submit_login">
+            <label for="E-mail">E-mail</label>
+            <input type="text" id="username" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">LOGIN</button>
+        </form>
+        <p>New User? <a href="/signup_page">Register now here</a>.</p>
+        <div id="popup" class="popup">
+            <span id="popupMessage"></span>
+            <span class="close-btn" onclick="closePopup()">X</span>
+        </div>
+        <% if (message) { %>
+            <script>
+                const popup = document.getElementById('popup');
+                const popupMessage = document.getElementById('popupMessage');
+                popupMessage.innerText = "<%= message %>";
+                popup.classList.add('show');
+
+                function closePopup() {
+                    popup.classList.remove('show');
+                }
+
+                setTimeout(closePopup, 5000); // Close after 5 seconds (adjust time as needed)
+            </script>
+            <% } %>
+
+
+    </div>
+</body>
+
+</html>
